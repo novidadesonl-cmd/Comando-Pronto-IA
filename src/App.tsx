@@ -39,6 +39,89 @@ const libraryItems = [
   { category: 'Bônus', title: 'Transformador de prompt fraco em prompt profissional', when: 'Quando você sabe o que quer, mas não sabe pedir direito.' },
 ];
 
+const creativeScripts = [
+  {
+    title: 'Criativo 1 — Você está pedindo errado',
+    hook: 'Você não está usando IA errado. Você só está pedindo do jeito errado.',
+    scene: 'Tela dividida: de um lado “faça um post”, do outro o Comando Pronto IA gerando um comando completo.',
+    speech: 'Quando você pede pouco contexto, a IA devolve texto genérico. O Comando Pronto IA te entrega comandos preenchíveis para criar posts, roteiros, anúncios e mensagens com mais clareza.',
+    screenText: 'Pare de pedir qualquer coisa para a IA.',
+    cta: 'Acesse o Comando Pronto IA e comece pelo plano que fizer sentido para você.',
+  },
+  {
+    title: 'Criativo 2 — Texto com cara de robô',
+    hook: 'Se o seu texto parece robô, o problema pode estar no comando.',
+    scene: 'Mostre um texto genérico na tela e depois destaque o campo “tom de voz” no gerador.',
+    speech: 'A maioria das pessoas pede: faça uma legenda. Só que isso não dá direção. O comando certo informa público, dor, desejo, canal e tom de voz.',
+    screenText: 'Texto ruim nasce de comando fraco.',
+    cta: 'Use o Comando Pronto IA para pedir melhor.',
+  },
+  {
+    title: 'Criativo 3 — Tela em branco',
+    hook: 'Travou na hora de postar? Comece pelo comando, não pela legenda.',
+    scene: 'Pessoa olhando para uma tela vazia. Corte para biblioteca de comandos.',
+    speech: 'Você escolhe o tipo de conteúdo, preenche campos simples e copia um comando pronto para usar no ChatGPT, Gemini ou Claude.',
+    screenText: 'Da tela em branco para um comando pronto.',
+    cta: 'Clique no link e veja os planos.',
+  },
+  {
+    title: 'Criativo 4 — Antes e depois',
+    hook: 'Olha a diferença entre pedir assim e pedir do jeito certo.',
+    scene: 'Mostre “faça um anúncio” versus um prompt estruturado gerado pelo sistema.',
+    speech: 'Um pedido solto gera resposta solta. Um comando com contexto, objetivo e regras gera uma resposta muito mais aproveitável.',
+    screenText: 'Prompt fraco x comando profissional.',
+    cta: 'Teste com o Comando Pronto IA.',
+  },
+  {
+    title: 'Criativo 5 — Para quem posta todo dia',
+    hook: 'Se você precisa postar para vender, não pode depender de inspiração.',
+    scene: 'Calendário, celular e gerador aberto no notebook.',
+    speech: 'O Comando Pronto IA organiza o pedido para a IA criar ideias, roteiros, legendas, mensagens e anúncios. Você copia, cola e ajusta.',
+    screenText: 'Conteúdo precisa de sistema, não só inspiração.',
+    cta: 'Comece pelo Kit Inicial ou pelo Gerador Interativo.',
+  },
+  {
+    title: 'Criativo 6 — WhatsApp parado',
+    hook: 'O cliente chamou no WhatsApp e você não sabe como responder?',
+    scene: 'Print fictício de conversa: “quanto custa?” e “vou pensar”.',
+    speech: 'Na biblioteca, você encontra comandos para resposta inicial, objeção de preço, follow-up e fechamento consultivo.',
+    screenText: 'Mensagens melhores para WhatsApp.',
+    cta: 'Use os comandos do Comando Pronto IA.',
+  },
+  {
+    title: 'Criativo 7 — Dono de negócio local',
+    hook: 'Você tem um negócio, mas não tem tempo para virar especialista em IA.',
+    scene: 'Salão, loja ou serviço local. Depois tela do gerador com campos preenchidos.',
+    speech: 'Você só precisa responder campos simples: nicho, produto, público, dor e objetivo. O sistema monta o comando para você.',
+    screenText: 'IA simples para quem precisa vender.',
+    cta: 'Acesse o Gerador Interativo.',
+  },
+  {
+    title: 'Criativo 8 — R$27 de entrada',
+    hook: 'Quer começar barato? Comece com os comandos prontos.',
+    scene: 'Mostrar card do plano R$27 e lista de entregas.',
+    speech: 'O Kit Inicial traz 15 Prompts-Mestre, exemplos preenchidos, guia rápido e bônus para tirar cara de robô dos textos.',
+    screenText: 'Kit Inicial — R$27.',
+    cta: 'Clique em comprar e comece hoje.',
+  },
+  {
+    title: 'Criativo 9 — Gerador R$47',
+    hook: 'O plano mais recomendado é para quem quer preencher e copiar.',
+    scene: 'Mostre o plano R$47 e depois o gerador funcionando.',
+    speech: 'No Gerador Interativo, você preenche os campos, gera o comando e copia para usar na sua IA favorita.',
+    screenText: 'Gerador Interativo — R$47.',
+    cta: 'Acesse o plano recomendado.',
+  },
+  {
+    title: 'Criativo 10 — Prova visual',
+    hook: 'Isso aqui não é curso longo. É ferramenta de uso rápido.',
+    scene: 'Gravação de tela navegando por Home, Gerador, Biblioteca, Guia e Planos.',
+    speech: 'O Comando Pronto IA foi feito para reduzir esforço: você entra, escolhe o comando, preenche, copia e cola na IA.',
+    screenText: 'Pronto para aplicar.',
+    cta: 'Acesse a página de planos e escolha por onde começar.',
+  },
+];
+
 function BibliotecaPage() {
   const categories = ['Conteúdo', 'Venda', 'WhatsApp', 'Bônus'];
 
@@ -83,6 +166,59 @@ function BibliotecaPage() {
         <h2 className="text-2xl font-black tracking-tight">Entrega do kit</h2>
         <p className="mt-4 max-w-4xl leading-8 text-slate-300">
           A promessa principal é simples: o cliente copia comandos melhores para usar no ChatGPT, Gemini, Claude ou outra IA de texto.
+        </p>
+      </div>
+    </section>
+  );
+}
+
+function CriativosPage() {
+  return (
+    <section className="space-y-8">
+      <div className="rounded-3xl bg-white p-8 shadow-sm ring-1 ring-slate-200 md:p-10">
+        <p className="text-sm font-black uppercase tracking-[0.2em] text-blue-700">Criativos</p>
+        <h1 className="mt-3 max-w-4xl text-4xl font-black tracking-tight text-slate-950 md:text-5xl">
+          10 criativos curtos para divulgar o Comando Pronto IA
+        </h1>
+        <p className="mt-4 max-w-3xl text-lg leading-8 text-slate-600">
+          Use estes roteiros em Reels, TikTok, Shorts ou anúncios simples. Grave com tela do produto, narração e texto grande na tela.
+        </p>
+      </div>
+
+      <div className="grid gap-5 lg:grid-cols-2">
+        {creativeScripts.map((creative) => (
+          <article key={creative.title} className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
+            <h2 className="text-2xl font-black tracking-tight text-slate-950">{creative.title}</h2>
+            <div className="mt-5 space-y-4">
+              <div className="rounded-2xl bg-blue-50 p-4 ring-1 ring-blue-100">
+                <p className="text-xs font-black uppercase tracking-[0.16em] text-blue-700">Gancho</p>
+                <p className="mt-2 font-bold leading-7 text-blue-950">{creative.hook}</p>
+              </div>
+              <div className="rounded-2xl bg-slate-50 p-4 ring-1 ring-slate-200">
+                <p className="text-xs font-black uppercase tracking-[0.16em] text-slate-600">Cena</p>
+                <p className="mt-2 leading-7 text-slate-700">{creative.scene}</p>
+              </div>
+              <div className="rounded-2xl bg-white p-4 ring-1 ring-slate-200">
+                <p className="text-xs font-black uppercase tracking-[0.16em] text-slate-600">Fala</p>
+                <p className="mt-2 leading-7 text-slate-700">{creative.speech}</p>
+              </div>
+              <div className="rounded-2xl bg-emerald-50 p-4 ring-1 ring-emerald-100">
+                <p className="text-xs font-black uppercase tracking-[0.16em] text-emerald-700">Texto na tela</p>
+                <p className="mt-2 font-bold leading-7 text-emerald-950">{creative.screenText}</p>
+              </div>
+              <div className="rounded-2xl bg-slate-950 p-4 text-white">
+                <p className="text-xs font-black uppercase tracking-[0.16em] text-emerald-300">CTA</p>
+                <p className="mt-2 font-bold leading-7 text-white">{creative.cta}</p>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <div className="rounded-3xl bg-slate-950 p-8 text-white shadow-xl md:p-10">
+        <h2 className="text-2xl font-black tracking-tight">Direção de gravação</h2>
+        <p className="mt-4 max-w-4xl leading-8 text-slate-300">
+          Grave vídeos verticais, com tela do produto, cortes rápidos e texto grande. O objetivo dos primeiros criativos é validar clique e interesse, não explicar tudo.
         </p>
       </div>
     </section>
@@ -289,6 +425,7 @@ export default function App() {
             ['/', 'Início'],
             ['/gerador', 'Gerador'],
             ['/biblioteca', 'Biblioteca'],
+            ['/criativos', 'Criativos'],
             ['/guia', 'Guia'],
             ['/planos', 'Planos'],
           ].map(([to, label]) => (
@@ -310,6 +447,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/gerador" element={<Gerador />} />
           <Route path="/biblioteca" element={<BibliotecaPage />} />
+          <Route path="/criativos" element={<CriativosPage />} />
           <Route path="/guia" element={<GuidePage />} />
           <Route path="/planos" element={<PlanosPage />} />
         </Routes>
