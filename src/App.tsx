@@ -13,9 +13,9 @@ function SimplePage({ title, description }: { title: string; description: string
 }
 
 const checkoutLinks = {
-  plan27: '#link-checkout-27',
-  plan47: '#link-checkout-47',
-  plan97: '#link-checkout-97',
+  plan27: 'https://pay.kiwify.com.br/fto850R',
+  plan47: 'https://pay.kiwify.com.br/5sI8ZPh',
+  plan97: 'https://pay.kiwify.com.br/kUOZJi1',
 };
 
 const libraryItems = [
@@ -253,6 +253,8 @@ function PlanosPage() {
             </ul>
             <a
               href={plan.link}
+              target="_blank"
+              rel="noreferrer"
               className="mt-7 inline-flex w-full justify-center rounded-full bg-gradient-to-r from-blue-700 to-emerald-600 px-6 py-3 font-black text-white shadow-lg"
             >
               Comprar {plan.price}
