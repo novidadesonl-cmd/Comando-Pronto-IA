@@ -89,6 +89,108 @@ function BibliotecaPage() {
   );
 }
 
+function GuidePage() {
+  const steps = [
+    {
+      title: '1. Escolha o tipo de comando',
+      text: 'Entre no gerador e escolha se quer criar roteiro curto, post, legenda, anúncio, mensagem de WhatsApp, objeções, página de venda, calendário, humanização de texto ou oferta.',
+    },
+    {
+      title: '2. Preencha os campos simples',
+      text: 'Informe nicho, produto ou serviço, público, dor, desejo, tom de voz, canal, objetivo e observações. Não precisa escrever perfeito. O comando usa essas informações para orientar a IA.',
+    },
+    {
+      title: '3. Clique em gerar comando',
+      text: 'O sistema monta um prompt estruturado com papel da IA, contexto, tarefa, regras de linguagem e critérios de qualidade.',
+    },
+    {
+      title: '4. Copie e cole na sua IA',
+      text: 'Use o botão copiar e cole o comando no ChatGPT, Gemini, Claude ou outra IA de texto. A resposta final será gerada dentro da IA que você usa.',
+    },
+    {
+      title: '5. Peça ajustes se precisar',
+      text: 'Depois da primeira resposta, peça para a IA deixar mais curto, mais humano, mais direto, com mais emoção ou com mais exemplos práticos.',
+    },
+  ];
+
+  const quickCommands = [
+    'Deixe mais direto e com menos palavras.',
+    'Crie 3 variações com ganchos diferentes.',
+    'Reescreva sem parecer texto de IA.',
+    'Adapte para Instagram Reels.',
+    'Transforme em mensagem curta para WhatsApp.',
+    'Remova palavras genéricas e deixe mais natural.',
+  ];
+
+  return (
+    <section className="space-y-8">
+      <div className="rounded-3xl bg-white p-8 shadow-sm ring-1 ring-slate-200 md:p-10">
+        <p className="text-sm font-black uppercase tracking-[0.2em] text-blue-700">Guia de uso</p>
+        <h1 className="mt-3 max-w-4xl text-4xl font-black tracking-tight text-slate-950 md:text-5xl">
+          Como usar o Comando Pronto IA
+        </h1>
+        <p className="mt-4 max-w-3xl text-lg leading-8 text-slate-600">
+          O sistema gera comandos profissionais para você copiar e colar na IA. Ele não substitui o ChatGPT, Gemini ou Claude: ele ajuda você a pedir melhor.
+        </p>
+      </div>
+
+      <div className="grid gap-4 md:grid-cols-2">
+        {steps.map((step) => (
+          <article key={step.title} className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
+            <h2 className="text-xl font-black tracking-tight text-slate-950">{step.title}</h2>
+            <p className="mt-3 leading-7 text-slate-600">{step.text}</p>
+          </article>
+        ))}
+      </div>
+
+      <div className="grid gap-6 lg:grid-cols-2">
+        <div className="rounded-3xl bg-white p-8 shadow-sm ring-1 ring-slate-200">
+          <h2 className="text-2xl font-black tracking-tight text-slate-950">Exemplo de uso</h2>
+          <div className="mt-5 rounded-2xl bg-slate-50 p-5 ring-1 ring-slate-200">
+            <p className="font-black text-slate-950">Prompt fraco:</p>
+            <p className="mt-2 text-slate-600">Faça um post sobre meu produto.</p>
+          </div>
+          <div className="mt-4 rounded-2xl bg-emerald-50 p-5 ring-1 ring-emerald-100">
+            <p className="font-black text-emerald-950">Comando melhor:</p>
+            <p className="mt-2 leading-7 text-emerald-950">
+              Crie um post para um público específico, considerando a dor, o desejo, o canal, o tom de voz e uma chamada para ação clara.
+            </p>
+          </div>
+        </div>
+
+        <div className="rounded-3xl bg-slate-950 p-8 text-white shadow-xl">
+          <h2 className="text-2xl font-black tracking-tight">Comandos rápidos para ajustar a resposta</h2>
+          <ul className="mt-5 space-y-3">
+            {quickCommands.map((command) => (
+              <li key={command} className="rounded-2xl bg-white/10 p-4 font-bold leading-7 text-slate-100 ring-1 ring-white/10">
+                {command}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      <div className="rounded-3xl bg-white p-8 shadow-sm ring-1 ring-slate-200 md:p-10">
+        <h2 className="text-2xl font-black tracking-tight text-slate-950">Erros comuns</h2>
+        <div className="mt-5 grid gap-4 md:grid-cols-3">
+          <div className="rounded-2xl bg-red-50 p-5 ring-1 ring-red-100">
+            <h3 className="font-black text-red-950">Pedir sem contexto</h3>
+            <p className="mt-2 leading-7 text-red-900">Quanto menos contexto você dá, mais genérica fica a resposta.</p>
+          </div>
+          <div className="rounded-2xl bg-red-50 p-5 ring-1 ring-red-100">
+            <h3 className="font-black text-red-950">Não informar o público</h3>
+            <p className="mt-2 leading-7 text-red-900">Texto para todo mundo geralmente não convence ninguém.</p>
+          </div>
+          <div className="rounded-2xl bg-red-50 p-5 ring-1 ring-red-100">
+            <h3 className="font-black text-red-950">Aceitar a primeira resposta</h3>
+            <p className="mt-2 leading-7 text-red-900">Use a primeira resposta como base e peça ajustes simples.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function PlanosPage() {
   const plans = [
     {
@@ -206,7 +308,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/gerador" element={<Gerador />} />
           <Route path="/biblioteca" element={<BibliotecaPage />} />
-          <Route path="/guia" element={<SimplePage title="Guia de Uso" description="Aqui ficará o passo a passo para usar os comandos no ChatGPT, Gemini ou Claude." />} />
+          <Route path="/guia" element={<GuidePage />} />
           <Route path="/planos" element={<PlanosPage />} />
         </Routes>
       </main>
