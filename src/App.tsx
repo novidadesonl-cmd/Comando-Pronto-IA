@@ -18,6 +18,77 @@ const checkoutLinks = {
   plan97: '#link-checkout-97',
 };
 
+const libraryItems = [
+  { category: 'Conteúdo', title: 'Gerador de ideias de Reels', when: 'Quando você precisa de ideias rápidas para vídeos curtos.' },
+  { category: 'Conteúdo', title: 'Gerador de roteiro curto', when: 'Quando já tem uma ideia, mas não sabe estruturar a fala.' },
+  { category: 'Conteúdo', title: 'Gerador de legenda com CTA', when: 'Quando o post está pronto, mas falta texto para chamar ação.' },
+  { category: 'Conteúdo', title: 'Gerador de carrossel', when: 'Quando quer ensinar algo em formato simples e passo a passo.' },
+  { category: 'Conteúdo', title: 'Gerador de calendário de 7 dias', when: 'Quando precisa postar sem pensar tudo do zero.' },
+  { category: 'Venda', title: 'Gerador de oferta simples', when: 'Quando tem um serviço ou ideia, mas ainda não tem promessa clara.' },
+  { category: 'Venda', title: 'Gerador de post de venda', when: 'Quando precisa vender sem parecer insistente.' },
+  { category: 'Venda', title: 'Gerador de anúncio curto', when: 'Quando quer testar uma copy simples para anúncio ou criativo.' },
+  { category: 'Venda', title: 'Gerador de quebra de objeções', when: 'Quando o cliente diz caro, vou pensar ou não tenho tempo.' },
+  { category: 'Venda', title: 'Gerador de CTA', when: 'Quando o conteúdo está bom, mas falta chamada para ação.' },
+  { category: 'WhatsApp', title: 'Resposta para interessado', when: 'Quando alguém chama pedindo informação e você quer responder melhor.' },
+  { category: 'WhatsApp', title: 'Mensagem para “vou pensar”', when: 'Quando a conversa esfria depois do preço.' },
+  { category: 'WhatsApp', title: 'Mensagem para objeção de preço', when: 'Quando o cliente compara só valor e não entende a entrega.' },
+  { category: 'WhatsApp', title: 'Mensagem de follow-up', when: 'Quando precisa retomar contato sem parecer chata.' },
+  { category: 'WhatsApp', title: 'Mensagem de fechamento consultivo', when: 'Quando o cliente demonstrou interesse, mas ainda não decidiu.' },
+  { category: 'Bônus', title: 'Humanizador de texto de IA', when: 'Quando o texto ficou bonito, mas com cara de robô.' },
+  { category: 'Bônus', title: 'Removedor de clichês de IA', when: 'Quando aparecem palavras genéricas e frases vazias.' },
+  { category: 'Bônus', title: 'Transformador de prompt fraco em prompt profissional', when: 'Quando você sabe o que quer, mas não sabe pedir direito.' },
+];
+
+function BibliotecaPage() {
+  const categories = ['Conteúdo', 'Venda', 'WhatsApp', 'Bônus'];
+
+  return (
+    <section className="space-y-8">
+      <div className="rounded-3xl bg-white p-8 shadow-sm ring-1 ring-slate-200 md:p-10">
+        <p className="text-sm font-black uppercase tracking-[0.2em] text-blue-700">Biblioteca</p>
+        <h1 className="mt-3 max-w-4xl text-4xl font-black tracking-tight text-slate-950 md:text-5xl">
+          Biblioteca de comandos simples para conteúdo, venda e WhatsApp
+        </h1>
+        <p className="mt-4 max-w-3xl text-lg leading-8 text-slate-600">
+          Use esta página como vitrine do produto. O cliente vê o que existe no kit e escolhe qual comando quer usar no gerador.
+        </p>
+      </div>
+
+      {categories.map((category) => (
+        <div key={category} className="space-y-4">
+          <h2 className="text-2xl font-black tracking-tight text-slate-950">{category}</h2>
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {libraryItems
+              .filter((item) => item.category === category)
+              .map((item) => (
+                <article key={item.title} className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
+                  <span className="rounded-full bg-blue-50 px-3 py-1 text-xs font-black uppercase tracking-wide text-blue-700">
+                    {item.category}
+                  </span>
+                  <h3 className="mt-4 text-xl font-black tracking-tight text-slate-950">{item.title}</h3>
+                  <p className="mt-3 leading-7 text-slate-600">{item.when}</p>
+                  <NavLink
+                    to="/gerador"
+                    className="mt-5 inline-flex rounded-full bg-white px-5 py-2 font-black text-slate-800 ring-1 ring-slate-300 hover:bg-blue-50"
+                  >
+                    Usar no gerador
+                  </NavLink>
+                </article>
+              ))}
+          </div>
+        </div>
+      ))}
+
+      <div className="rounded-3xl bg-slate-950 p-8 text-white shadow-xl md:p-10">
+        <h2 className="text-2xl font-black tracking-tight">Entrega do kit</h2>
+        <p className="mt-4 max-w-4xl leading-8 text-slate-300">
+          A promessa principal é simples: o cliente copia comandos melhores para usar no ChatGPT, Gemini, Claude ou outra IA de texto.
+        </p>
+      </div>
+    </section>
+  );
+}
+
 function PlanosPage() {
   const plans = [
     {
@@ -134,7 +205,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/gerador" element={<Gerador />} />
-          <Route path="/biblioteca" element={<SimplePage title="Biblioteca de Prompts" description="Em seguida, esta página receberá os 15 Prompts-Mestre e os 3 bônus do produto." />} />
+          <Route path="/biblioteca" element={<BibliotecaPage />} />
           <Route path="/guia" element={<SimplePage title="Guia de Uso" description="Aqui ficará o passo a passo para usar os comandos no ChatGPT, Gemini ou Claude." />} />
           <Route path="/planos" element={<PlanosPage />} />
         </Routes>
