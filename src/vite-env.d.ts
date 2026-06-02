@@ -1,1 +1,1 @@
-/// <reference types="vite/client" />
+/// <reference path="./types/local.d.ts" />
