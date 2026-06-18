@@ -70,6 +70,9 @@ export default function Gerador() {
     [category],
   );
 
+  const completedFields = Object.entries(form).filter(([, value]) => String(value).trim()).length;
+  const progress = Math.round((completedFields / Object.keys(form).length) * 100);
+
   function updateField(field: keyof PromptFormData, value: string) {
     setForm((current) => ({ ...current, [field]: value }));
   }
@@ -116,17 +119,31 @@ export default function Gerador() {
   ];
 
   return (
-    <section>
-      <div className="mb-8 rounded-3xl bg-white p-8 shadow-sm ring-1 ring-slate-200">
-        <p className="text-sm font-black uppercase tracking-[0.2em] text-blue-700">Gerador Interativo</p>
-        <h1 className="mt-3 text-4xl font-black tracking-tight text-slate-950 md:text-5xl">Gerador de Prompts</h1>
-        <p className="mt-4 max-w-3xl text-lg leading-8 text-slate-600">
-          Escolha uma categoria, preencha os dados do negócio e gere um comando profissional para colar no ChatGPT, Gemini ou Claude.
-        </p>
+    <section className="space-y-8">
+      <div className="overflow-hidden rounded-[2rem] bg-slate-950 p-7 text-white shadow-2xl ring-1 ring-white/10 md:p-10">
+        <div className="grid gap-8 lg:grid-cols-[1fr_0.75fr] lg:items-end">
+          <div>
+            <p className="text-sm font-black uppercase tracking-[0.22em] text-emerald-300">Gerador Interativo</p>
+            <h1 className="mt-3 max-w-4xl text-4xl font-black tracking-tight md:text-6xl">Monte um prompt profissional sem começar do zero.</h1>
+            <p className="mt-4 max-w-3xl text-lg leading-8 text-slate-300">
+              Escolha uma categoria, preencha os dados do negócio e gere um comando pronto para colar na sua IA favorita.
+            </p>
+          </div>
+          <div className="rounded-3xl bg-white/10 p-5 ring-1 ring-white/10">
+            <div className="flex items-center justify-between gap-4">
+              <span className="text-sm font-bold text-slate-300">Preenchimento</span>
+              <span className="text-2xl font-black text-emerald-300">{progress}%</span>
+            </div>
+            <div className="mt-4 h-3 overflow-hidden rounded-full bg-white/10">
+              <div className="h-full rounded-full bg-gradient-to-r from-blue-400 to-emerald-300 transition-all" style={{ width: `${progress}%` }} />
+            </div>
+            <p className="mt-3 text-sm leading-6 text-slate-300">Quanto mais contexto, mais específico fica o comando final.</p>
+          </div>
+        </div>
       </div>
 
       <div className="grid gap-6 lg:grid-cols-[1.04fr_0.96fr]">
-        <form onSubmit={generatePrompt} className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200 md:p-8">
+        <form onSubmit={generatePrompt} className="rounded-[2rem] bg-white p-6 shadow-xl shadow-slate-200/70 ring-1 ring-slate-200 md:p-8">
           <label className="grid gap-2 font-bold text-slate-800">
             Categoria
             <select
@@ -135,7 +152,7 @@ export default function Gerador() {
                 setCategory(event.target.value as PromptCategory);
                 setGeneratedPrompt('');
               }}
-              className="rounded-2xl border border-slate-300 bg-white px-4 py-3 outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-100"
+              className="rounded-2xl border border-slate-300 bg-white px-4 py-3 outline-none transition focus:border-blue-600 focus:ring-4 focus:ring-blue-100"
             >
               {promptTemplates.map((template) => (
                 <option key={template.id} value={template.id}>
@@ -145,7 +162,7 @@ export default function Gerador() {
             </select>
           </label>
 
-          <p className="mt-4 rounded-2xl bg-blue-50 p-4 text-sm font-semibold leading-6 text-blue-950">
+          <p className="mt-4 rounded-2xl bg-blue-50 p-4 text-sm font-semibold leading-6 text-blue-950 ring-1 ring-blue-100">
             {selectedTemplate.description}
           </p>
 
@@ -158,14 +175,14 @@ export default function Gerador() {
                     value={form[field.key]}
                     onChange={(event) => updateField(field.key, event.target.value)}
                     placeholder={field.placeholder}
-                    className="min-h-28 rounded-2xl border border-slate-300 bg-white px-4 py-3 outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-100"
+                    className="min-h-28 rounded-2xl border border-slate-300 bg-slate-50 px-4 py-3 outline-none transition focus:border-blue-600 focus:bg-white focus:ring-4 focus:ring-blue-100"
                   />
                 ) : (
                   <input
                     value={form[field.key]}
                     onChange={(event) => updateField(field.key, event.target.value)}
                     placeholder={field.placeholder}
-                    className="rounded-2xl border border-slate-300 bg-white px-4 py-3 outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-100"
+                    className="rounded-2xl border border-slate-300 bg-slate-50 px-4 py-3 outline-none transition focus:border-blue-600 focus:bg-white focus:ring-4 focus:ring-blue-100"
                   />
                 )}
               </label>
@@ -173,19 +190,19 @@ export default function Gerador() {
           </div>
 
           <div className="mt-6 flex flex-wrap gap-3">
-            <button type="submit" className="rounded-full bg-gradient-to-r from-blue-700 to-emerald-600 px-6 py-3 font-black text-white shadow-lg">
+            <button type="submit" className="rounded-full bg-gradient-to-r from-blue-700 to-emerald-600 px-6 py-3 font-black text-white shadow-lg transition hover:scale-[1.02]">
               Gerar comando
             </button>
-            <button type="button" onClick={loadExample} className="rounded-full bg-blue-50 px-6 py-3 font-black text-blue-800 ring-1 ring-blue-100">
+            <button type="button" onClick={loadExample} className="rounded-full bg-blue-50 px-6 py-3 font-black text-blue-800 ring-1 ring-blue-100 transition hover:bg-blue-100">
               Usar exemplo
             </button>
-            <button type="button" onClick={clear} className="rounded-full bg-white px-6 py-3 font-black text-slate-700 ring-1 ring-slate-300">
+            <button type="button" onClick={clear} className="rounded-full bg-white px-6 py-3 font-black text-slate-700 ring-1 ring-slate-300 transition hover:bg-slate-50">
               Limpar campos
             </button>
           </div>
         </form>
 
-        <aside className="rounded-3xl bg-slate-950 p-6 text-white shadow-xl md:p-8">
+        <aside className="rounded-[2rem] bg-slate-950 p-6 text-white shadow-2xl md:p-8 lg:sticky lg:top-6 lg:self-start">
           <p className="text-sm font-black uppercase tracking-[0.2em] text-emerald-300">Resultado</p>
           <h2 className="mt-3 text-3xl font-black tracking-tight">Seu prompt pronto</h2>
           {generatedPrompt ? (
@@ -193,13 +210,20 @@ export default function Gerador() {
               <pre className="mt-5 max-h-[620px] overflow-auto whitespace-pre-wrap rounded-2xl bg-slate-900 p-5 text-sm leading-7 text-slate-100 ring-1 ring-white/10">
                 {generatedPrompt}
               </pre>
-              <button onClick={copyPrompt} className="mt-5 rounded-full bg-emerald-500 px-6 py-3 font-black text-slate-950">
+              <button onClick={copyPrompt} className="mt-5 rounded-full bg-emerald-400 px-6 py-3 font-black text-slate-950 shadow-lg shadow-emerald-950/20 transition hover:bg-emerald-300">
                 Copiar prompt
               </button>
               {copyStatus && <p className="mt-3 font-bold text-emerald-200">{copyStatus}</p>}
             </>
           ) : (
-            <p className="mt-5 leading-8 text-slate-300">Preencha os campos e clique em “Gerar comando”. O prompt aparecerá aqui.</p>
+            <div className="mt-5 rounded-2xl bg-white/10 p-5 ring-1 ring-white/10">
+              <p className="leading-8 text-slate-300">Preencha os campos e clique em “Gerar comando”. O prompt aparecerá aqui.</p>
+              <div className="mt-5 space-y-3 text-sm text-slate-300">
+                <p>✓ Sem texto genérico</p>
+                <p>✓ Com regras de linguagem</p>
+                <p>✓ Com objetivo e CTA claros</p>
+              </div>
+            </div>
           )}
 
           <div className="mt-6 rounded-2xl bg-white/10 p-5 ring-1 ring-white/10">
